@@ -9,3 +9,7 @@ def greet():
 @app.get("/user/{name}")
 def greet_user(name):
     return {f"Hello {name}"}
+
+if __name__=="__main__":
+    import uvicorn
+    uvicorn.run("basics:app", host="127.0.0.0", port=8001, reload=True)
