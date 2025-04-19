@@ -4,11 +4,11 @@ app= FastAPI()
 
 @app.get("/")
 def greet():
-    return {"Hello World"}
+    return {"greeting":"Hello World"}
 
 @app.get("/user/{name}")
-def greet_user(name):
-    return {f"Hello {name}"}
+def greet_user(name : str):
+    return {"greeting":f"Hello {name}"}
 
 if __name__=="__main__":
     import uvicorn
