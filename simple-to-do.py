@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app=FastAPI()
@@ -25,4 +25,12 @@ def get_task(id : int):
     for task in tasks:
         if task.id == id:
             return task
-    return {f"There is no task with id {id}"}
+    raise HTTPException (status_code=404, detail="There is no task found")
+
+@app.put("/update-task")
+def update_task(id: int, updated_task : Task):
+    for i, task in enumerate(tasks):
+        if task.id == id:
+            tasks[i]=updated_task
+            return {f"The task {id} is updated successfully!"}
+    raise HTTPException(status_code=404, detail="There is no task found")
