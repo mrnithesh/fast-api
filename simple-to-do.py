@@ -20,14 +20,14 @@ def create_task(task: Task):
 def get_tasks():
     return tasks
 
-@app.get("/get-task")
+@app.get("/get-task/{id}")
 def get_task(id : int):
     for task in tasks:
         if task.id == id:
             return task
     raise HTTPException (status_code=404, detail="There is no task found")
 
-@app.put("/update-task")
+@app.put("/update-task/{id}")
 def update_task(id: int, updated_task : Task):
     for i, task in enumerate(tasks):
         if task.id == id:
@@ -35,7 +35,7 @@ def update_task(id: int, updated_task : Task):
             return {f"The task {id} is updated successfully!"}
     raise HTTPException(status_code=404, detail="There is no task found")
 
-@app.delete("/delete-task")
+@app.delete("/delete-task/{id}")
 def delete_task(id: int):
     for i, task in enumerate(tasks):
         if task.id==id:
